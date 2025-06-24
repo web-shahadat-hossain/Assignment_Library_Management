@@ -10,6 +10,11 @@ router.post(
   validateRequest(borrowValidation),
   borrowController.createBorrowController
 );
+router.get(
+  "/",
+
+  borrowController.getAllBorrowController
+);
 
 export const borrowRouters = {
   router,
