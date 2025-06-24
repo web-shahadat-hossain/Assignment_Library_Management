@@ -13,13 +13,33 @@ A backend project built using **Typescript**, **Express JS**, **MongoDB** with M
 
 ## Project Structure
 
-src/
-├── config/ # Database and environment config
-├── models/ # Mongoose schemas
-├── controllers/ # Route logic
-├── routes/ # API routes
-├── middlewares/ # Error handlers, validators
-└── server.ts # Entry point
+```bash
+
+├──src/
+├── app/
+│ └── modules/
+│ ├── books/
+│ │ ├── books.controller.ts
+│ │ ├── books.interface.ts
+│ │ ├── books.model.ts
+│ │ ├── books.router.ts
+│ │ └── books.validation.ts
+│ │
+│ └── Borrow/
+│ ├── borrow.controller.ts
+│ ├── borrow.interface.ts
+│ ├── borrow.model.ts
+│ ├── borrow.router.ts
+│ └── borrow.validation.ts
+│
+├── errors
+├── interface
+├── middleware
+├── routes
+├── app.ts
+├── server.ts `
+
+```
 
 ## 🛠️ How to get started
 
