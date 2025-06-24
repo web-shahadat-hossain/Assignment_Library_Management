@@ -47,7 +47,6 @@ const bookSchema = new Schema<IBooks>(
     timestamps: true,
   }
 );
-
 bookSchema.methods.borrowCopies = async function name(quantity: number) {
   if (this.copies < quantity) {
     throw new Error(`Only ${this.copies} copies available`);
