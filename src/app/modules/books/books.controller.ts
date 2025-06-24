@@ -53,7 +53,51 @@ const getAllBookController = async (
   }
 };
 
+const getByIdBookController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { bookId } = req.params;
+    const newBook = await Books.findById(bookId);
+
+    res.status(201).json({
+      success: true,
+      message: "Book retrieved successfully",
+      data: newBook,
+    });
+  } catch (error: any) {
+    next(error);
+  }
+};
+const updateByIdBookController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { bookId } = req.params;
+    const copies = req.body;
+    console.log(copies);
+    const newBook = await Books.updateOne(
+      { _id: bookId },
+      { $set: { ...copies } }
+    );
+
+    res.status(201).json({
+      success: true,
+      message: "Book updated successfully",
+      data: newBook,
+    });
+  } catch (error: any) {
+    next(error);
+  }
+};
+
 export const bookController = {
   createBookController,
   getAllBookController,
+  getByIdBookController,
+  updateByIdBookController,
 };
