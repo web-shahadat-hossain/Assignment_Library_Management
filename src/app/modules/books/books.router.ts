@@ -10,6 +10,7 @@ router.post(
   validateRequest(booksValidation),
   bookController.createBookController
 );
+router.get("/", bookController.getAllBookController);
 
 export const booksRouters = {
   router,
