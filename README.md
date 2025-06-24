@@ -60,5 +60,5 @@ npm install
 - POST https://library-management-qza5.onrender.com/api/books
 - PATCH https://library-management-qza5.onrender.com/api/books/:id
 - DELETE https://library-management-qza5.onrender.com/api/books/:id
-- POST https://library-management-qza5.onrender.com/api/borrows
-- GET https://library-management-qza5.onrender.com/api/borrows
+- POST https://library-management-qza5.onrender.com/api/borrow
+- GET https://library-management-qza5.onrender.com/api/borrow
