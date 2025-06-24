@@ -48,4 +48,15 @@ const bookSchema = new Schema<IBooks>(
   }
 );
 
+bookSchema.methods.borrowCopies = async function name(quantity: number) {
+  if (this.copies < quantity) {
+    throw new Error(`Only ${this.copies} copies available`);
+  }
+
+  this.copies -= quantity;
+  if (this.copies === 0) this.available = false;
+
+  return await this.save();
+};
+
 export const Books = model<IBooks>("Books", bookSchema);
