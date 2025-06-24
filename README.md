@@ -55,10 +55,10 @@ npm install
 
 ## Project endpoint:
 
-- GET /api/books
-- GET /api/books/:id
-- POST /api/books
-- PATCH /api/books/:id
-- DELETE /api/books/:id
-- POST /api/borrows
-- GET /api/borrows
+- GET https://library-management-qza5.onrender.com/api/books
+- GET https://library-management-qza5.onrender.com/api/books/:id
+- POST https://library-management-qza5.onrender.com/api/books
+- PATCH https://library-management-qza5.onrender.com/api/books/:id
+- DELETE https://library-management-qza5.onrender.com/api/books/:id
+- POST https://library-management-qza5.onrender.com/api/borrows
+- GET https://library-management-qza5.onrender.com/api/borrows
