@@ -1,5 +1,6 @@
 import { model, Schema } from "mongoose";
 import { IBooks } from "./books.interface";
+import { string } from "zod";
 
 const bookSchema = new Schema<IBooks>(
   {
@@ -10,6 +11,11 @@ const bookSchema = new Schema<IBooks>(
     author: {
       type: String,
       required: true,
+    },
+    isbn: {
+      type: String,
+      required: true,
+      unique: true,
     },
     genre: {
       type: String,
@@ -23,6 +29,7 @@ const bookSchema = new Schema<IBooks>(
       ],
       required: true,
     },
+
     description: {
       type: String,
       required: true,
