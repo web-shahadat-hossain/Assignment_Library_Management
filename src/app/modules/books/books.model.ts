@@ -46,6 +46,13 @@ bookSchema.methods.borrowCopies = async function (
   return await this.save();
 };
 
+bookSchema.pre("save", function (next) {
+  if (this.copies < 0) {
+    throw new Error("Copies cannot be negative");
+  }
+  next();
+});
+
 export const Books: Model<IBookDocument> = model<IBookDocument>(
   "Books",
   bookSchema
