@@ -12,6 +12,7 @@ router.post(
 );
 router.get("/:bookId", bookController.getByIdBookController);
 router.put("/:bookId", bookController.updateByIdBookController);
+router.delete("/:bookId", bookController.deleteByIdBookController);
 router.get("/", bookController.getAllBookController);
 
 export const booksRouters = {

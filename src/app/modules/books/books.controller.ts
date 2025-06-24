@@ -94,10 +94,30 @@ const updateByIdBookController = async (
     next(error);
   }
 };
+const deleteByIdBookController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { bookId } = req.params;
+
+    await Books.deleteOne({ _id: bookId });
+
+    res.status(201).json({
+      success: true,
+      message: "Book deleted successfully",
+      data: null,
+    });
+  } catch (error: any) {
+    next(error);
+  }
+};
 
 export const bookController = {
   createBookController,
   getAllBookController,
   getByIdBookController,
   updateByIdBookController,
+  deleteByIdBookController,
 };
