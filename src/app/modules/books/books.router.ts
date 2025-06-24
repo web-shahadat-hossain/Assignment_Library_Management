@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.post(
   "/",
-
+  validateRequest(booksValidation),
   bookController.createBookController
 );
 
