@@ -27,25 +27,51 @@ const getAllBookController = async (
 ) => {
   try {
     const {
-      filter,
+      page = "1",
+      limit = "12",
+      searchTerm = "",
       sortBy = "createdAt",
-      sort = "desc",
-      limit = "10",
+      sortOrder = "desc",
+      genre = "",
     } = req.query;
+
     const filterCondition: any = {};
-    if (filter) {
-      filterCondition.genre = filter;
+
+    if (genre) {
+      filterCondition.genre = genre;
     }
 
-    const sortCondition: any = { [sortBy as string]: sort === "desc" ? -1 : 1 };
+    if (searchTerm) {
+      filterCondition.$or = [
+        { title: { $regex: searchTerm, $options: "i" } },
+        { author: { $regex: searchTerm, $options: "i" } },
+      ];
+    }
+
+    const sortCondition: any = {
+      [sortBy as string]: sortOrder === "desc" ? -1 : 1,
+    };
+
+    const pageNumber = parseInt(page as string);
+    const limitNumber = parseInt(limit as string);
+    const skip = (pageNumber - 1) * limitNumber;
+
+    const total = await Books.countDocuments(filterCondition);
 
     const books = await Books.find(filterCondition)
       .sort(sortCondition)
-      .limit(Number(limit));
+      .skip(skip)
+      .limit(limitNumber);
 
-    res.status(201).json({
+    res.status(200).json({
       success: true,
       message: "Books retrieved successfully",
+      meta: {
+        page: pageNumber,
+        limit: limitNumber,
+        total,
+        totalPages: Math.ceil(total / limitNumber),
+      },
       data: books,
     });
   } catch (error: any) {
@@ -78,11 +104,19 @@ const updateByIdBookController = async (
 ) => {
   try {
     const { bookId } = req.params;
-    const copies = req.body;
-    console.log(copies);
+    const { copies, ...rest } = req.body;
+
+    const available = copies > 0;
+
     const newBook = await Books.updateOne(
       { _id: bookId },
-      { $set: { ...copies } }
+      {
+        $set: {
+          copies,
+          available,
+          ...rest,
+        },
+      }
     );
 
     res.status(201).json({

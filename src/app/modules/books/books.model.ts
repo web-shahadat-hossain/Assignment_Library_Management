@@ -50,6 +50,7 @@ bookSchema.pre("save", function (next) {
   if (this.copies < 0) {
     throw new Error("Copies cannot be negative");
   }
+  this.available = this.copies > 0;
   next();
 });
 
